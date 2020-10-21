@@ -1,0 +1,18 @@
+[2020-04-16 15:23:04] WARN  org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer 78 logDuplicateJsonObjectsWarning - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/C:/Users/10450/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+	jar:file:/C:/Users/10450/.m2/repository/com/tdunning/json/1.8/json-1.8.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+
+[2020-04-16 15:23:05] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo.mapper]' package. Please check your configuration.
+[2020-04-16 15:23:05] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+[2020-04-16 15:23:08] WARN  org.springframework.context.support.AbstractApplicationContext 558 refresh - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/DruidDataSourceAutoConfigure.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: dbType not support : hive, url jdbc:mysql://196.128.29.129:10000/default?hive.exec.mode.local.auto=true
+[2020-04-16 15:23:55] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo.mapper]' package. Please check your configuration.
+[2020-04-16 15:23:56] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+[2020-04-16 15:23:57] WARN  org.springframework.context.support.AbstractApplicationContext 558 refresh - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/DruidDataSourceAutoConfigure.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: dbType not support : hive, url jdbc:mysql://196.128.29.129:10000/default?hive.exec.mode.local.auto=true
+[2020-04-16 15:24:20] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo.mapper]' package. Please check your configuration.
+[2020-04-16 15:24:20] WARN  org.mybatis.spring.mapper.ClassPathMapperScanner 166 doScan - No MyBatis mapper was found in '[com.example.demo]' package. Please check your configuration.
+[2020-04-16 15:24:22] WARN  org.springframework.context.support.AbstractApplicationContext 558 refresh - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'dataSource' defined in class path resource [com/alibaba/druid/spring/boot/autoconfigure/DruidDataSourceAutoConfigure.class]: Invocation of init method failed; nested exception is java.sql.SQLException: org.apache.hive.jdbc.HiveDriver
