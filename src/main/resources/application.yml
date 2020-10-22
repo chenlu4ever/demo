@@ -84,8 +84,8 @@ spring:
     proxy-target-class: true
 
 # 日志配置文件
-logging:
-  config: classpath:log4j2.xml
+#logging:
+# config: classpath:log4j2.xml
 
 # mybatis映射文件路径
 mybatis:
