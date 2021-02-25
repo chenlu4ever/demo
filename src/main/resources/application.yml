@@ -90,3 +90,8 @@ spring:
 # mybatis映射文件路径
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
+
+testconfig:
+  id: abd
+  name: test_name
+  num: 100

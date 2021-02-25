@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TblInviteInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.TblInviteInfo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="inviter" jdbcType="VARCHAR" property="inviter" />
+    <result column="begin_time" jdbcType="TIMESTAMP" property="beginTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+    <result column="meeting_theme" jdbcType="VARCHAR" property="meetingTheme" />
+    <result column="data_status" jdbcType="VARCHAR" property="dataStatus" />
+    <result column="meeting_status" jdbcType="VARCHAR" property="meetingStatus" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.example.demo.model.TblInviteInfo">
+    <result column="meeting_content" jdbcType="LONGVARCHAR" property="meetingContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, inviter, begin_time, end_time, meeting_theme, data_status, meeting_status, create_by, 
+    create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    meeting_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tbl_invite_info
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from tbl_invite_info
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.TblInviteInfo">
+    insert into tbl_invite_info (id, inviter, begin_time, 
+      end_time, meeting_theme, data_status, 
+      meeting_status, create_by, create_time, 
+      meeting_content)
+    values (#{id,jdbcType=VARCHAR}, #{inviter,jdbcType=VARCHAR}, #{beginTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{meetingTheme,jdbcType=VARCHAR}, #{dataStatus,jdbcType=VARCHAR}, 
+      #{meetingStatus,jdbcType=VARCHAR}, #{createBy,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{meetingContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.TblInviteInfo">
+    insert into tbl_invite_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="inviter != null">
+        inviter,
+      </if>
+      <if test="beginTime != null">
+        begin_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="meetingTheme != null">
+        meeting_theme,
+      </if>
+      <if test="dataStatus != null">
+        data_status,
+      </if>
+      <if test="meetingStatus != null">
+        meeting_status,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="meetingContent != null">
+        meeting_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="inviter != null">
+        #{inviter,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingTheme != null">
+        #{meetingTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="dataStatus != null">
+        #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingStatus != null">
+        #{meetingStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingContent != null">
+        #{meetingContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.TblInviteInfo">
+    update tbl_invite_info
+    <set>
+      <if test="inviter != null">
+        inviter = #{inviter,jdbcType=VARCHAR},
+      </if>
+      <if test="beginTime != null">
+        begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingTheme != null">
+        meeting_theme = #{meetingTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="dataStatus != null">
+        data_status = #{dataStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="meetingStatus != null">
+        meeting_status = #{meetingStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="meetingContent != null">
+        meeting_content = #{meetingContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.model.TblInviteInfo">
+    update tbl_invite_info
+    set inviter = #{inviter,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      meeting_theme = #{meetingTheme,jdbcType=VARCHAR},
+      data_status = #{dataStatus,jdbcType=VARCHAR},
+      meeting_status = #{meetingStatus,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      meeting_content = #{meetingContent,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.TblInviteInfo">
+    update tbl_invite_info
+    set inviter = #{inviter,jdbcType=VARCHAR},
+      begin_time = #{beginTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      meeting_theme = #{meetingTheme,jdbcType=VARCHAR},
+      data_status = #{dataStatus,jdbcType=VARCHAR},
+      meeting_status = #{meetingStatus,jdbcType=VARCHAR},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
