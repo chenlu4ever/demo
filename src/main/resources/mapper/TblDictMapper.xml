@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.TblDictMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.TblDict">
+    <id column="dict_code" jdbcType="VARCHAR" property="dictCode" />
+    <id column="dict_item_no" jdbcType="VARCHAR" property="dictItemNo" />
+    <result column="dict_name" jdbcType="VARCHAR" property="dictName" />
+    <result column="dict_item_name" jdbcType="VARCHAR" property="dictItemName" />
+    <result column="dict_srot" jdbcType="INTEGER" property="dictSrot" />
+    <result column="dict_status" jdbcType="VARCHAR" property="dictStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dict_code, dict_item_no, dict_name, dict_item_name, dict_srot, dict_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="com.example.demo.model.TblDictKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dict
+    where dict_code = #{dictCode,jdbcType=VARCHAR}
+      and dict_item_no = #{dictItemNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.example.demo.model.TblDictKey">
+    delete from tbl_dict
+    where dict_code = #{dictCode,jdbcType=VARCHAR}
+      and dict_item_no = #{dictItemNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.model.TblDict">
+    insert into tbl_dict (dict_code, dict_item_no, dict_name, 
+      dict_item_name, dict_srot, dict_status
+      )
+    values (#{dictCode,jdbcType=VARCHAR}, #{dictItemNo,jdbcType=VARCHAR}, #{dictName,jdbcType=VARCHAR}, 
+      #{dictItemName,jdbcType=VARCHAR}, #{dictSrot,jdbcType=INTEGER}, #{dictStatus,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.model.TblDict">
+    insert into tbl_dict
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="dictCode != null">
+        dict_code,
+      </if>
+      <if test="dictItemNo != null">
+        dict_item_no,
+      </if>
+      <if test="dictName != null">
+        dict_name,
+      </if>
+      <if test="dictItemName != null">
+        dict_item_name,
+      </if>
+      <if test="dictSrot != null">
+        dict_srot,
+      </if>
+      <if test="dictStatus != null">
+        dict_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="dictCode != null">
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictItemNo != null">
+        #{dictItemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictItemName != null">
+        #{dictItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSrot != null">
+        #{dictSrot,jdbcType=INTEGER},
+      </if>
+      <if test="dictStatus != null">
+        #{dictStatus,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.model.TblDict">
+    update tbl_dict
+    <set>
+      <if test="dictName != null">
+        dict_name = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictItemName != null">
+        dict_item_name = #{dictItemName,jdbcType=VARCHAR},
+      </if>
+      <if test="dictSrot != null">
+        dict_srot = #{dictSrot,jdbcType=INTEGER},
+      </if>
+      <if test="dictStatus != null">
+        dict_status = #{dictStatus,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dict_code = #{dictCode,jdbcType=VARCHAR}
+      and dict_item_no = #{dictItemNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.model.TblDict">
+    update tbl_dict
+    set dict_name = #{dictName,jdbcType=VARCHAR},
+      dict_item_name = #{dictItemName,jdbcType=VARCHAR},
+      dict_srot = #{dictSrot,jdbcType=INTEGER},
+      dict_status = #{dictStatus,jdbcType=VARCHAR}
+    where dict_code = #{dictCode,jdbcType=VARCHAR}
+      and dict_item_no = #{dictItemNo,jdbcType=VARCHAR}
+  </update>
+</mapper>

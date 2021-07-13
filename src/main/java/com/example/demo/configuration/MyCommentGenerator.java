@@ -1,5 +1,6 @@
 package com.example.demo.configuration;
 
+import static org.mybatis.generator.internal.util.StringUtility.composeFullyQualifiedTableName;
 import static org.mybatis.generator.internal.util.StringUtility.isTrue;
 
 
@@ -7,30 +8,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import com.example.demo.util.DateUtils;
 import org.mybatis.generator.api.CommentGenerator;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
-import org.mybatis.generator.api.dom.java.CompilationUnit;
-import org.mybatis.generator.api.dom.java.Field;
-import org.mybatis.generator.api.dom.java.InnerClass;
-import org.mybatis.generator.api.dom.java.InnerEnum;
-import org.mybatis.generator.api.dom.java.JavaElement;
-import org.mybatis.generator.api.dom.java.Method;
-import org.mybatis.generator.api.dom.java.TopLevelClass;
-import org.mybatis.generator.api.dom.xml.TextElement;
+import org.mybatis.generator.api.dom.java.*;
 import org.mybatis.generator.api.dom.xml.XmlElement;
-import org.mybatis.generator.api.dom.java.Parameter;
 import org.mybatis.generator.config.MergeConstants;
 import org.mybatis.generator.config.PropertyRegistry;
 
 /**
- * @Title: MyCommentGenerator.java
- * @Package com.fendo.mybatis_generator_plus
- * @Description:  mybatis generator 自定义comment生成器.
- *                基于MBG 1.3.5
- * @author fendo
- * @date 2017年10月5日 下午3:07:26
- * @version V1.0
+ *
  */
 public class MyCommentGenerator implements CommentGenerator{
 
@@ -122,8 +110,6 @@ public class MyCommentGenerator implements CommentGenerator{
      *@Title addConfigurationProperties
      *@Description: 从该配置中的任何属性添加此实例的属性CommentGenerator配置。
      *              这个方法将在任何其他方法之前被调用。
-     *@Author fendo
-     *@Date 2017年10月5日 下午3:45:58
      *@return
      *@throws
      */
@@ -208,10 +194,8 @@ public class MyCommentGenerator implements CommentGenerator{
         sb.append(introspectedTable.getFullyQualifiedTable());
         field.addJavaDocLine(sb.toString().replace("\n", " "));
         field.addJavaDocLine(" */");
-
-
-
     }
+
 
     /**
      * 为字段添加注释
@@ -222,11 +206,22 @@ public class MyCommentGenerator implements CommentGenerator{
             return;
         }
         StringBuilder sb = new StringBuilder();
-        field.addJavaDocLine("/**");
-        sb.append(" * ");
-        sb.append(introspectedColumn.getRemarks());
-        field.addJavaDocLine(sb.toString().replace("\n", " "));
-        field.addJavaDocLine(" */");
+        sb.append("@ApiModelProperty(value = \""+introspectedColumn.getRemarks()+"\"");
+        if(!introspectedTable.getPrimaryKeyColumns().contains(introspectedColumn)){
+            sb.append(",required = "+ !introspectedColumn.isNullable());
+        }
+        if(isDateType(introspectedColumn)){
+            sb.append(", example = \""+ DateUtils.getNowStringDateByDate(DateUtils.DATETIME_FORMAT) +"\"");
+        }
+        sb.append(")");
+        field.addJavaDocLine(sb.toString().replace("\n"," "));
+        if(isDateType(introspectedColumn)){
+            field.addJavaDocLine("@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = \"yyyy-MM-dd HH:mm:ss\", timezone = \"GMT+8\")");
+        }
+    }
+
+    private boolean isDateType(IntrospectedColumn introspectedColumn) {
+        return "TIMESTAMP".equalsIgnoreCase(introspectedColumn.getJdbcTypeName()) || introspectedColumn.isJDBCDateColumn() || introspectedColumn.isJDBCTimeColumn();
     }
 
     /**
@@ -265,19 +260,31 @@ public class MyCommentGenerator implements CommentGenerator{
         method.addJavaDocLine(" */");
     }
 
+//    /**
+//     * 给Java文件加注释，这个注释是在文件的顶部，也就是package上面。
+//     */
+//    @Override
+//    public void addJavaFileComment(CompilationUnit compilationUnit) {
+//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//        compilationUnit.addFileCommentLine("/*");
+//        compilationUnit.addFileCommentLine("*");
+//        compilationUnit.addFileCommentLine("* "+compilationUnit.getType().getShortName()+".java");
+//        compilationUnit.addFileCommentLine("* Copyright(C) 2017-2020 fendo公司");
+//        compilationUnit.addFileCommentLine("* @date "+sdf.format(new Date())+"");
+//        compilationUnit.addFileCommentLine("*/");
+//    }
+
     /**
-     * 给Java文件加注释，这个注释是在文件的顶部，也就是package上面。
+     * 用swagger注释
+     * @param compilationUnit
      */
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-        compilationUnit.addFileCommentLine("/*");
-        compilationUnit.addFileCommentLine("*");
-        compilationUnit.addFileCommentLine("* "+compilationUnit.getType().getShortName()+".java");
-        compilationUnit.addFileCommentLine("* Copyright(C) 2017-2020 fendo公司");
-        compilationUnit.addFileCommentLine("* @date "+sdf.format(new Date())+"");
-        compilationUnit.addFileCommentLine("*/");
+        compilationUnit.addImportedType(new FullyQualifiedJavaType(("io.swagger.annotations.ApiModelProperty")));
+        compilationUnit.addImportedType(new FullyQualifiedJavaType(("com.fasterxml.jackson.annotation.JsonFormat")));
+        return;
     }
+
 
     /**
      * 为模型类添加注释

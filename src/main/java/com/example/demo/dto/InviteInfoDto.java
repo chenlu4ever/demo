@@ -1,13 +1,11 @@
-package com.example.demo.model;
+package com.example.demo.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TblInviteInfo implements Serializable {
-
+public class InviteInfoDto {
     @ApiModelProperty(value = "主键")
     private String id;
 
@@ -216,7 +214,7 @@ public class TblInviteInfo implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        TblInviteInfo other = (TblInviteInfo) that;
+        InviteInfoDto other = (InviteInfoDto) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getInviter() == null ? other.getInviter() == null : this.getInviter().equals(other.getInviter()))
             && (this.getBeginTime() == null ? other.getBeginTime() == null : this.getBeginTime().equals(other.getBeginTime()))

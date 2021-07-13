@@ -42,12 +42,6 @@ public class UserController {
         return modelAndView;
     }
 
-    @GetMapping("/login")
-    public ModelAndView login(ModelAndView modelAndView){
-        modelAndView.setViewName("/user/login.html");
-        return modelAndView;
-    }
-
     @PostMapping(value ="/login")
     public ModelAndView login(ModelAndView modelAndView, @Valid UserModel userVo, BindingResult bindingResult){
         if(bindingResult.hasErrors()){

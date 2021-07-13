@@ -12,6 +12,14 @@ public class ResponseInfo<T> {
     @ApiModelProperty(value = "返回数据")
     private T data;
 
+    public ResponseInfo(){
+    }
+
+    public ResponseInfo(String rtnCode){
+        this.rtnCode=rtnCode;
+        this.rtnMsg=ResponseUtil.getMsgByCode(rtnCode);
+    }
+
     public String getRtnCode() {
         return rtnCode;
     }
