@@ -1,0 +1,31 @@
+package com.example.demo.service.impl;
+
+import com.example.demo.constants.DemoConstants;
+import com.example.demo.dao.TblUserInfoMapper;
+import com.example.demo.model.TblUserInfo;
+import com.example.demo.service.UserInfoService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+@Service
+public class UserInfoServiceImpl implements UserInfoService {
+
+    @Autowired
+    TblUserInfoMapper tblUserInfoMapper;
+
+    @Override
+    public List<TblUserInfo> queryUserList(TblUserInfo record) {
+       return tblUserInfoMapper.queryUserList(record);
+    }
+
+    @Override
+    public void addUser(TblUserInfo tblUserInfo) {
+        tblUserInfo.setUserId(UUID.randomUUID().toString());
+        tblUserInfo.setDataStatus(DemoConstants.DATA_STATUS_VALIDATE);
+        tblUserInfoMapper.insertSelective(tblUserInfo);
+    }
+}

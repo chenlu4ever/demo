@@ -1,0 +1,37 @@
+09:58:32.708 logback [restartedMain] INFO  com.example.demo.DemoApplication - Starting DemoApplication on ChenLu-ThinkPad with PID 6556 (D:\IdeaProjects\demo\target\classes started by 10450 in D:\IdeaProjects\demo)
+09:58:32.711 logback [restartedMain] INFO  com.example.demo.DemoApplication - No active profile set, falling back to default profiles: default
+09:58:32.759 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+09:58:32.760 logback [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+09:58:34.014 logback [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration' of type [com.alibaba.druid.spring.boot.autoconfigure.stat.DruidSpringAopConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09:58:34.128 logback [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'spring.datasource.druid-com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties' of type [com.alibaba.druid.spring.boot.autoconfigure.properties.DruidStatProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09:58:34.134 logback [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'advisor' of type [org.springframework.aop.support.RegexpMethodPointcutAdvisor] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+09:58:34.501 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+09:58:34.509 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+09:58:34.510 logback [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+09:58:34.510 logback [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.33]
+09:58:34.585 logback [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+09:58:34.585 logback [restartedMain] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1823 ms
+09:58:34.748 logback [restartedMain] INFO  c.a.d.s.b.a.DruidDataSourceAutoConfigure - Init DruidDataSource
+09:58:35.590 logback [restartedMain] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+09:58:36.057 logback [restartedMain] INFO  s.d.s.w.PropertySourcedRequestMappingHandlerMapping - Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2Controller#getDocumentation(String, HttpServletRequest)]
+09:58:36.142 logback [restartedMain] INFO  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 4919c3ba-8e4a-4cfa-b952-19752282c405
+
+09:58:36.209 logback [restartedMain] INFO  o.s.s.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6933c00f, org.springframework.security.web.context.SecurityContextPersistenceFilter@4b9e0551, org.springframework.security.web.header.HeaderWriterFilter@2dc01507, org.springframework.security.web.csrf.CsrfFilter@28333e7c, org.springframework.security.web.authentication.logout.LogoutFilter@74dfec7c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1ab603e6, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@112ee258, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@8518b91, org.springframework.security.web.session.SessionManagementFilter@55c95ece, org.springframework.security.web.access.ExceptionTranslationFilter@3ce419a4]
+09:58:36.325 logback [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+09:58:36.374 logback [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+09:58:36.467 logback [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'HTML5' is deprecated. Using Template Mode 'HTML' instead.
+09:58:36.776 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Context refreshed
+09:58:36.790 logback [restartedMain] INFO  s.d.s.w.p.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+09:58:36.814 logback [restartedMain] INFO  s.d.s.w.s.ApiListingReferenceScanner - Scanning for api listing references
+09:58:36.972 logback [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+09:58:36.991 logback [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+09:58:36.995 logback [restartedMain] INFO  com.example.demo.DemoApplication - Started DemoApplication in 4.91 seconds (JVM running for 5.812)
+09:58:49.831 logback [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+09:58:49.831 logback [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+09:58:49.838 logback [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+09:58:49.964 logback [http-nio-8080-exec-1] DEBUG c.e.d.d.T.queryUserList - ==>  Preparing: select user_id, user_name, password, login_id, telephone, data_status from tbl_user_info where 1=1 
+09:58:50.044 logback [http-nio-8080-exec-1] DEBUG c.e.d.d.T.queryUserList - ==> Parameters: 
+09:58:50.214 logback [http-nio-8080-exec-1] DEBUG c.e.d.d.T.queryUserList - <==      Total: 3
+09:58:50.214 logback [http-nio-8080-exec-1] ERROR com.alibaba.druid.wall.WallFilter - not support method : Connection.getMetaData

@@ -13,7 +13,17 @@
 
     <!-- 这里的 tbl_dict 缓存数据字典 -->
     <cache
-            name="tbl_dict"
+        name="all_dict"
+        eternal="false"
+        maxElementsInMemory="100"
+        overflowToDisk="false"
+        diskPersistent="false"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="300"
+        memoryStoreEvictionPolicy="LRU" />
+
+    <cache
+            name="data_dict"
             eternal="false"
             maxElementsInMemory="100"
             overflowToDisk="false"
