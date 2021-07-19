@@ -5,6 +5,9 @@ import com.example.demo.model.TblDictKey;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+import java.util.Map;
+
 public interface TblDictMapper {
     /**
      *
@@ -41,4 +44,8 @@ public interface TblDictMapper {
      * @mbg.generated 2021-03-04
      */
     int updateByPrimaryKey(TblDict record);
+
+    List<Map> queryAllDict();
+
+    List<Map> queryDataDict();
 }

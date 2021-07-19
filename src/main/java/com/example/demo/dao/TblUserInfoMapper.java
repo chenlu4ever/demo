@@ -4,12 +4,15 @@ import com.example.demo.model.TblUserInfo;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.util.List;
+import java.util.Map;
+
 public interface TblUserInfoMapper {
     /**
      *
      * @mbg.generated 2021-07-13
      */
-    int deleteByPrimaryKey(Integer userId);
+    int deleteByPrimaryKey(String userId);
 
     /**
      *
@@ -27,7 +30,7 @@ public interface TblUserInfoMapper {
      *
      * @mbg.generated 2021-07-13
      */
-    TblUserInfo selectByPrimaryKey(Integer userId);
+    TblUserInfo selectByPrimaryKey(String userId);
 
     /**
      *
@@ -40,4 +43,6 @@ public interface TblUserInfoMapper {
      * @mbg.generated 2021-07-13
      */
     int updateByPrimaryKey(TblUserInfo record);
+
+    List<TblUserInfo> queryUserList(TblUserInfo record);
 }

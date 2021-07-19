@@ -1,11 +1,14 @@
 package com.example.demo.model;
 
+import com.example.demo.aop.Dict;
+import com.example.demo.aop.SensitiveLabel;
+import com.example.demo.aop.SensitiveTypeEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 public class TblUserInfo {
     @ApiModelProperty(value = "主键")
-    private Integer userId;
+    private String userId;
 
     @ApiModelProperty(value = "姓名",required = false)
     private String userName;
@@ -16,9 +19,11 @@ public class TblUserInfo {
     @ApiModelProperty(value = "登录名",required = false)
     private String loginId;
 
+    @SensitiveLabel(type = SensitiveTypeEnum.MOBILE_PHONE)
     @ApiModelProperty(value = "手机",required = false)
     private String telephone;
 
+    @Dict(dictDataSource = "dataStatus")
     @ApiModelProperty(value = "1-有效 0-无效",required = false)
     private String dataStatus;
 
@@ -26,7 +31,7 @@ public class TblUserInfo {
      * 主键
      * @return user_id 主键
      */
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
@@ -34,7 +39,7 @@ public class TblUserInfo {
      * 主键
      * @param userId 主键
      */
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

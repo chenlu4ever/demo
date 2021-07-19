@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dto.InviteInfoDto;
-
 import java.util.Map;
 
-public interface InviteService {
-    InviteInfoDto queryInviteDetail(Map<String, String> requestMap);
+public interface TblDictService {
+    Map<String,String> queryAllDict();
+
+    Map<String, String> queryDataDict();
 }

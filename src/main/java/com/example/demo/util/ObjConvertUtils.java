@@ -5,15 +5,14 @@ package com.example.demo.util;
  * @description TODO
  * @date 2021/3/4 10:22
  */
+import com.example.demo.model.TblUserInfo;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author xiaoyang
- * @create  2020-11-29 8:32
- */
 public class ObjConvertUtils {
     /**
      * 获取类的所有属性，包括父类
@@ -44,6 +43,16 @@ public class ObjConvertUtils {
             return (true);
         }
         return (false);
+    }
+
+    public static void main(String[] args) {
+        StringBuilder sb = new StringBuilder();
+        Field[] fieds = TblUserInfo.class.getDeclaredFields();
+        for (Field field:fieds
+        ) {
+            sb.append("\""+field.getName()+"\":\""+field.getAnnotation(ApiModelProperty.class).value()+"\",");
+        }
+        System.out.println(sb.toString());
     }
 
 

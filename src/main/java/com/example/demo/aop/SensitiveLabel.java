@@ -13,18 +13,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Dict {
+public @interface SensitiveLabel {
 
-    /**
-     * 数据dataSource
-     *
-     * @return
-     */
-    String dictDataSource();
-
-    /**
-     * 返回put到json中的文本key
-     * @return
-     */
-    String dictText() default "";
+    SensitiveTypeEnum type();
 }

@@ -1,9 +1,12 @@
 package com.example.demo.aop;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.example.demo.service.TblDictService;
 import com.example.demo.util.ObjConvertUtils;
 import com.example.demo.util.PageInfo;
 import com.example.demo.util.ResponseInfo;
+import com.example.demo.util.SensitiveInfoUtils;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,13 +19,17 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 10450
@@ -32,11 +39,12 @@ import java.util.List;
 @Aspect
 @Component
 public class DictAspect {
-    public  static Logger log = LoggerFactory.getLogger(DictAspect.class);
+    public  static Logger logger = LoggerFactory.getLogger(DictAspect.class);
 
-//    //这是操作数据字典那张表的 service
-//    @Autowired
-//    private DictService dictService;
+    //这是操作数据字典那张表的 service
+    @Autowired
+    private TblDictService tblDictService;
+
     //翻译后拼接的内容
     private static String DICT_TEXT_SUFFIX = "_dictText";
 
@@ -54,21 +62,33 @@ public class DictAspect {
      */
     @Around("excudeService()")
     public Object doAround(ProceedingJoinPoint pjp) throws Throwable {
+        RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes sra = (ServletRequestAttributes) ra;
+        //防止不是http请求的方法，例如：scheduled
+        if (ra == null || sra == null) {
+            return pjp.proceed();
+        }
+
+        HttpServletRequest request = sra.getRequest();
+        logger.info(pjp.getSignature().getDeclaringTypeName() + "." + pjp.getSignature().getName()+" params:"+JSON.toJSONString(pjp.getArgs()));
+
         //这是定义开始事件
         long time1 = System.currentTimeMillis();
         //这是方法并获取返回结果
-        Object result = pjp.proceed();
+        Object response = pjp.proceed();
         //这是获取到 结束时间
         long time2 = System.currentTimeMillis();
-        log.debug("获取JSON数据 耗时：" + (time2 - time1) + "ms");
+        logger.debug("获取JSON数据 耗时：" + (time2 - time1) + "ms");
         //解析开始时间
         long start = System.currentTimeMillis();
         //开始解析（翻译字段内部的值凡是打了 @Dict 这玩意的都会被翻译）
-        this.parseDictText(result);
+        this.parseDictText(response);
         //解析结束时间
         long end = System.currentTimeMillis();
-        log.debug("解析注入JSON数据  耗时" + (end - start) + "ms");
-        return result;
+        logger.debug("处理返回数据  耗时" + (end - start) + "ms");
+
+        logger.info(pjp.getSignature().getDeclaringTypeName() + "." + pjp.getSignature().getName()+" return:{}", response != null ? JSON.toJSONString(response) : "");
+        return response;
     }
 
     /**
@@ -110,9 +130,13 @@ public class DictAspect {
                    responseInfo.setData(pageInfo);
                }else if(obj instanceof List){
                    List list = (List) obj;
+                   List returnList = new ArrayList();
                    for (Object record : list ) {
-                       responseInfo.setData(transDicFunc(record));
+                       returnList.add(transDicFunc(record));
                    }
+                   responseInfo.setData(returnList);
+               }else if(obj instanceof String){
+                   return;
                }else{
                    responseInfo.setData(transDicFunc(obj));
                }
@@ -127,7 +151,7 @@ public class DictAspect {
             //解决@JsonFormat注解解析不了的问题详见SysAnnouncement类的@JsonFormat
             json = mapper.writeValueAsString(record);
         } catch (JsonProcessingException e) {
-            log.error("json解析失败" + e.getMessage(), e);
+            logger.error("json解析失败" + e.getMessage(), e);
         }
         JSONObject item = JSONObject.parseObject(json);
 
@@ -139,21 +163,32 @@ public class DictAspect {
                 String code = field.getAnnotation(Dict.class).dictDataSource();
                 String text = field.getAnnotation(Dict.class).dictText();
                 //获取当前带翻译的值
-                String key = String.valueOf(item.get(field.getName()));
-                //翻译字典值对应的txt
-                String textValue = translateDictValue(code, key);
-                //  CommonConstant.DICT_TEXT_SUFFIX的值为，是默认值：
-                // public static final String DICT_TEXT_SUFFIX = "_dictText";
-                log.debug(" 字典Val : " + textValue);
-                log.debug(" __翻译字典字段__ " + field.getName() + DICT_TEXT_SUFFIX + "： " + textValue);
-                //如果给了文本名
-                if (!StringUtils.isEmpty(text)) {
-                    item.put(text, textValue);
-                } else {
-                    //走默认策略
-                    item.put(field.getName() + DICT_TEXT_SUFFIX, textValue);
+                String key = item.get(field.getName())==null?null:String.valueOf(item.get(field.getName()));
+                if(!StringUtils.isEmpty(key)){
+                    //翻译字典值对应的txt
+                    String textValue = translateDictValue(code, key);
+                    //  CommonConstant.DICT_TEXT_SUFFIX的值为，是默认值：
+                    // public static final String DICT_TEXT_SUFFIX = "_dictText";
+                    logger.debug(" 字典Val : " + textValue);
+                    logger.debug(" __翻译字典字段__ " + field.getName() + DICT_TEXT_SUFFIX + "： " + textValue);
+                    //如果给了文本名
+                    if (!StringUtils.isEmpty(text)) {
+                        item.put(text, textValue);
+                    } else {
+                        //走默认策略
+                        item.put(field.getName() + DICT_TEXT_SUFFIX, textValue);
+                    }
                 }
+            }
 
+            if (field.getAnnotation(SensitiveLabel.class) != null) {
+                SensitiveTypeEnum typeEnum = field.getAnnotation(SensitiveLabel.class).type();
+                String value = item.get(field.getName())==null?null:String.valueOf(item.get(field.getName()));
+                String value_n = "";
+                if(!StringUtils.isEmpty(value) && SensitiveTypeEnum.MOBILE_PHONE.equals(typeEnum)){
+                    value_n = SensitiveInfoUtils.mobilePhone(value);
+                    item.put(field.getName(),value_n);
+                }
             }
             //date类型默认转换string格式化日期
             if (field.getType().getName().equals("java.util.Date") && field.getAnnotation(JsonFormat.class) == null && item.get(field.getName()) != null) {
@@ -184,11 +219,12 @@ public class DictAspect {
         //循环 keys 中的所有值
         for (String k : keys) {
             String tmpValue = null;
-            log.debug(" 字典 key : " + k);
+            logger.debug(" 字典 key : " + k);
             if (k.trim().length() == 0) {
                 continue; //跳过循环
             }
-//            tmpValue = dictService.selectByDatasourceCode(code,k.trim());
+            Map<String,String> dataDcit = tblDictService.queryDataDict();
+            tmpValue = dataDcit.get(code+"_"+key);
 
             if (tmpValue != null) {
                 if (!"".equals(textValue.toString())) {
