@@ -12,6 +12,12 @@ public class ResponseUtil {
     public static final String FAILED_CODE = "999";
     public static final String FAILED_MSG = "系统原因异常，请稍后再试！";
 
+    public static final String DATA_NOT_EXISTES = "501";
+    public static final String DATA_NOT_EXISTES_MSG = "数据不存在！";
+
+    public static final String PASSWORD_ERROR = "502";
+    public static final String PASSWORD_ERROR_MSG = "密码不正确，请重新输入！";
+
    static {
        code2MsgMap.put(SUCCESS_CODE,SUCCESS_MSG);
        code2MsgMap.put(FAILED_CODE,FAILED_MSG);

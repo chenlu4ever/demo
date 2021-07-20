@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.UserDTO;
 import com.example.demo.model.TblUserInfo;
 import org.springframework.stereotype.Service;
 
@@ -10,4 +11,6 @@ public interface UserInfoService {
     List<TblUserInfo> queryUserList(TblUserInfo tblUserInfo);
 
     void addUser(TblUserInfo tblUserInfo);
+
+    TblUserInfo checkUserLogin(UserDTO userVo);
 }

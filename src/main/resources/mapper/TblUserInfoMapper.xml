@@ -60,7 +60,7 @@
         #{userName,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
-        md5(#{password,jdbcType=VARCHAR}),
+        #{password,jdbcType=VARCHAR},
       </if>
       <if test="loginId != null">
         #{loginId,jdbcType=VARCHAR},
@@ -110,19 +110,26 @@
     from tbl_user_info
     where 1=1
     <if test="userName != null">
-      and user_name = #{userNamejdbcType=VARCHAR}
+      and user_name = #{userName,jdbcType=VARCHAR}
     </if>
     <if test="password != null">
-      and password = md5(#{passwordjdbcType=VARCHAR})
+      and password = md5(#{password,jdbcType=VARCHAR})
     </if>
     <if test="loginId != null">
-      and login_id = #{loginIdjdbcType=VARCHAR}
+      and login_id = #{loginId,jdbcType=VARCHAR}
     </if>
     <if test="telephone != null">
-      and telephone = #{telephonejdbcType=VARCHAR}
+      and telephone = #{telephone,jdbcType=VARCHAR}
     </if>
     <if test="dataStatus != null">
-      and data_status = #{dataStatusjdbcType=VARCHAR}
+      and data_status = #{dataStatus,jdbcType=VARCHAR}
     </if>
+  </select>
+
+  <select id="queryByLoginId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from tbl_user_info
+    where login_id = #{loginId,jdbcType=VARCHAR}
   </select>
 </mapper>

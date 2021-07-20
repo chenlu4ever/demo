@@ -45,4 +45,6 @@ public interface TblUserInfoMapper {
     int updateByPrimaryKey(TblUserInfo record);
 
     List<TblUserInfo> queryUserList(TblUserInfo record);
+
+    TblUserInfo queryByLoginId(String loginId);
 }

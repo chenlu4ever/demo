@@ -1,13 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.TblUserInfo;
-import com.example.demo.model.UserModel;
+import com.example.demo.dto.UserDTO;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.util.MyBeanUtils;
 import com.example.demo.util.ResponseInfo;
 import com.example.demo.util.ResponseUtil;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +58,7 @@ public class UserController {
     }
 
     @PostMapping(value ="/login")
-    public ModelAndView login(ModelAndView modelAndView, @Valid UserModel userVo, BindingResult bindingResult){
+    public ModelAndView login(ModelAndView modelAndView, @Valid UserDTO userVo, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             modelAndView.addObject("error",bindingResult.getFieldError().getDefaultMessage());
             modelAndView.setViewName("login");

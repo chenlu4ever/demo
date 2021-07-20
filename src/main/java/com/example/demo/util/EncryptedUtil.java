@@ -3,11 +3,12 @@ package com.example.demo.util;
 import org.springframework.security.crypto.codec.Hex;
 
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
  * @author 10450
- * @description TODO
+ * @description MD5+salt
  * @date 2021/7/15 16:37
  */
 public class EncryptedUtil {
@@ -68,5 +69,12 @@ public class EncryptedUtil {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public static void main(String[] args) {
+        String psw = "aaaaa888@";
+//        String encode =  generate(psw,getRandomSalt());
+//        System.out.println("encode = " +encode);
+        System.out.println(verify(psw,"068194213561c39219e3e455549a5a32665ec4c41bd24f01"));
     }
 }

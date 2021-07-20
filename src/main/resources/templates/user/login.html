@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
 </head>
 <body>
-<form th:action="@{/user/login}" method="post">
+<form th:action="@{/loginSimple}" method="post">
     <div>
         <!--/*@thymesVar id="error" type=""*/-->
         <span id="basic-addon0">&nbsp;</span>
@@ -14,8 +14,8 @@
         <br />
     </div>
     <div>
-        <span id="basic-addon1">@用户名</span>
-        <input id="user_name" name="userName" type="text" placeholder="用户名" aria-describedby="basic-addon1" />
+        <span id="basic-addon1">@登录名</span>
+        <input id="login_id" name="loginId" type="text" placeholder="用户名" aria-describedby="basic-addon1" />
 
     </div>
     <br />

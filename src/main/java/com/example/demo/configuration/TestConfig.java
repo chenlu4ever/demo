@@ -1,6 +1,6 @@
 package com.example.demo.configuration;
 
-import com.example.demo.model.UserModel;
+import com.example.demo.dto.UserDTO;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,8 +37,8 @@ public class TestConfig {
     }
 
     @Bean
-    public UserModel UserModel(){
-        UserModel model = new UserModel();
+    public UserDTO UserModel(){
+        UserDTO model = new UserDTO();
         model.setUserName(test_name);
         model.setPassword(id);
         return model;
