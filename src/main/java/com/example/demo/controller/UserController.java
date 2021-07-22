@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.TblUserInfo;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.model.TblUserInfo;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.util.MyBeanUtils;
 import com.example.demo.util.ResponseInfo;
@@ -23,7 +23,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/user")
 @Api(tags = "用户管理")
-public class UserController {
+public class UserController{
     private static  final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired

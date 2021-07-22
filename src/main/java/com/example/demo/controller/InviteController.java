@@ -38,10 +38,10 @@ public class InviteController {
             return ResponseUtil.success(inviteInfoDto);
         }catch(DemoRuntimeException e){
             logger.error("查询会议邀约 queryInviteDetai error",e);
-            return ResponseUtil.error(e.getErrorCode(),e.getMessage(),null);
+            return ResponseUtil.error(e.getErrorCode(),e.getMessage());
         }catch(Exception e){
             logger.error("查询会议邀约 queryInviteDetai error",e);
-            return ResponseUtil.error(null);
+            return ResponseUtil.error();
 
         }
     }

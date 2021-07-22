@@ -3,7 +3,6 @@
     <contextName>logback</contextName>
     <property name="log.path" value="./log" />
 
-<!--    <conversionRule conversionWord="msg" converterClass="com.example.demo.util.log.SensitiveMessageConverter"/>-->
 
     <!--输出到控制台-->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">

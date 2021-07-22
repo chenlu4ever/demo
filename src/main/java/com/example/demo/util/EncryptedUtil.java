@@ -1,9 +1,7 @@
 package com.example.demo.util;
 
-import org.springframework.security.crypto.codec.Hex;
+import org.springframework.util.DigestUtils;
 
-import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -63,18 +61,20 @@ public class EncryptedUtil {
      */
     public static String md5Hex(String src) {
         try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            byte[] bs = md5.digest(src.getBytes());
-            return new String(new Hex().encode(bs));
+//            MessageDigest md5 = MessageDigest.getInstance("MD5");
+//            byte[] bs = md5.digest(src.getBytes());
+//            return new String(new Hex().encode(bs));
+            return DigestUtils.md5DigestAsHex(src.getBytes());
         } catch (Exception e) {
             return null;
         }
     }
 
     public static void main(String[] args) {
-        String psw = "aaaaa888@";
-//        String encode =  generate(psw,getRandomSalt());
-//        System.out.println("encode = " +encode);
-        System.out.println(verify(psw,"068194213561c39219e3e455549a5a32665ec4c41bd24f01"));
+        String psw = "你好啊@";
+        String encode =  generate(psw,getRandomSalt());
+        System.out.println("encode = " +encode);
+        System.out.println(verify(psw,encode));
+//        System.out.println(verify(psw,"068194213561c39219e3e455549a5a32665ec4c41bd24f01"));
     }
 }

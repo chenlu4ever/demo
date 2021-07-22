@@ -2,6 +2,7 @@ package com.example.demo.configuration;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dto.UserDTO;
+import com.example.demo.dto.UserSessionDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -20,13 +21,25 @@ public final class WebUtil {
     private static Logger logger =  LoggerFactory.getLogger(WebUtil.class);
     private static final String USER_KEY = "user";
 
-    public static void setUserSession(UserDTO userVo) {
+    public static void setUserSession(UserSessionDTO userVo) {
         setSession(USER_KEY, JSONObject.toJSONString(userVo));
+    }
+
+    public static UserSessionDTO getUserSession(HttpServletRequest request) {
+        Object object = request.getSession(true).getAttribute(USER_KEY);
+        logger.info("---#####---getUserSession: sessionId="+request.getSession().getId()+",user="+JSONObject.toJSONString(object)+"---#####---");
+        if(object==null){
+            return null;
+        }
+
+        String userStr = (String)object;
+        return JSONObject.parseObject(userStr,UserSessionDTO.class);
     }
 
     private static void setSession(String key, String obj) {
         HttpSession httpSession = getHttpServletRequest().getSession(true);
         httpSession.setMaxInactiveInterval(30*60);
+        logger.info("---#####---setSession: sessionId="+httpSession.getId()+",key="+key+",value="+obj+"---#####---");
         httpSession.setAttribute(key,obj);
     }
 
@@ -39,5 +52,6 @@ public final class WebUtil {
         ServletRequestAttributes servletRequestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         return servletRequestAttributes.getResponse();
     }
+
 
 }

@@ -15,7 +15,6 @@ public class UserDTO {
 
     @NotEmpty(message = "密码不能为空！")
     @ApiModelProperty(value = "密码")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private String password;
 
     @ApiModelProperty(value = "用户姓名")

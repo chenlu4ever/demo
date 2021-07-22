@@ -133,10 +133,6 @@
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-cache:2.2.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: net.sf.ehcache:ehcache:2.10.6" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-security:2.2.6.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-config:5.2.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:5.2.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.springframework.security:spring-security-web:5.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.12.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-data-redis:2.2.6.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.data:spring-data-redis:2.2.6.RELEASE" level="project" />
@@ -155,5 +151,7 @@
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.session:spring-session-data-redis:2.2.2.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.session:spring-session-core:2.2.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.13.1" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
   </component>
 </module>

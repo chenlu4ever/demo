@@ -12,5 +12,5 @@ public interface UserInfoService {
 
     void addUser(TblUserInfo tblUserInfo);
 
-    TblUserInfo checkUserLogin(UserDTO userVo);
+    TblUserInfo checkUserLogin(Map<String,Object> paramMap);
 }

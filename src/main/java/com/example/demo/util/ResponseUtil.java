@@ -12,6 +12,9 @@ public class ResponseUtil {
     public static final String FAILED_CODE = "999";
     public static final String FAILED_MSG = "系统原因异常，请稍后再试！";
 
+    public static final String NOT_LOGIN = "444";
+    public static final String NOT_LOGIN_MSG = "用户未登录！";
+
     public static final String DATA_NOT_EXISTES = "501";
     public static final String DATA_NOT_EXISTES_MSG = "数据不存在！";
 
@@ -31,19 +34,17 @@ public class ResponseUtil {
         return responseInfo;
     }
 
-    public static ResponseInfo error(Object object){
+    public static ResponseInfo error(){
         ResponseInfo responseInfo = new ResponseInfo();
         responseInfo.setRtnCode(FAILED_CODE);
         responseInfo.setRtnMsg(FAILED_MSG);
-        responseInfo.setData(object);
         return responseInfo;
     }
 
-    public static ResponseInfo error(String rtnCode,String rtnMsg, Object object){
+    public static ResponseInfo error(String rtnCode,String rtnMsg){
         ResponseInfo responseInfo = new ResponseInfo();
         responseInfo.setRtnCode(rtnCode);
         responseInfo.setRtnMsg(rtnMsg);
-        responseInfo.setData(object);
         return responseInfo;
     }
 

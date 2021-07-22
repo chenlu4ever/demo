@@ -214,7 +214,7 @@ public class DictAspect {
         }
         StringBuffer textValue = new StringBuffer();
         //分割 key 值
-        System.out.println(code+":::::"+key);
+//        System.out.println(code+":::::"+key);
         String[] keys = key.split(",");
         //循环 keys 中的所有值
         for (String k : keys) {

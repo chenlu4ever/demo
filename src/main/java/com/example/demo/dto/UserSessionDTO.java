@@ -10,13 +10,12 @@ import javax.validation.constraints.NotEmpty;
  * 登录session
  */
 @ApiModel
-public class LoginDTO {
+public class UserSessionDTO {
 
     @ApiModelProperty(value = "登录名")
     private String loginId;
 
     @ApiModelProperty(value = "密码")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private String password;
 
     @ApiModelProperty(value = "用户姓名")
