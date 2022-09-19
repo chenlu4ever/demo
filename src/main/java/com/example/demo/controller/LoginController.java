@@ -7,15 +7,15 @@ import com.example.demo.model.TblUserInfo;
 import com.example.demo.service.UserInfoService;
 import com.example.demo.util.ResponseInfo;
 import com.example.demo.util.ResponseUtil;
-import com.sun.deploy.nativesandbox.comm.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 

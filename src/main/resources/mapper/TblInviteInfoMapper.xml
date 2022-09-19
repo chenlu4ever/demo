@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.dao.TblInviteInfoMapper">
+  <cache >
+
+  </cache>
   <resultMap id="BaseResultMap" type="com.example.demo.model.TblInviteInfo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="inviter" jdbcType="VARCHAR" property="inviter" />
@@ -22,7 +25,7 @@
   <sql id="Blob_Column_List">
     meeting_content
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs" useCache="">
     select 
     <include refid="Base_Column_List" />
     ,

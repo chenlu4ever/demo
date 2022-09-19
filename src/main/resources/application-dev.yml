@@ -105,7 +105,7 @@ spring:
     password: 123456
     #redis超时时间（毫秒），如果不设置，取默认值2000
     timeout: 10000
-    #最大空闲数
+    #最大空闲数,，(还有一个minIdle特殊配置采用，类似连接池预热，初始化连接池)
     maxIdle: 300
     #连接池的最大数据库连接数。设为0表示无限制,如果是jedis 2.4以后用redis.maxTotal
     #maxActive=600
